@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+nav {
+    background-color: #00000000;
+    height: 64px;
+    z-index: 1000;
+}
+
+.judul-hero {
+    line-height: 55px;
+}
+
+.hidden {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tab-container ul {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0;
+    margin: 0;
+}
+
+.tablinks {
+    color: #d1d5db;
+}
+
+.tablinks.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+.tablinks:hover:not(.active) {
+    background-color: #1f2937;
+    color: white;
+}
+
+.card-film {
+    background-color: #00000000;
+    width: 280px;
+}
+h1 {
+    font-weight: 600;
+}
+.rollback {
+    background-color: #818181;
+}
+.rollback:hover {
+    background-color: #a7a7a7;
+}
+
+.form-input-data {
+    border: 3px solid #9ca3af !important;
+}
+/* Detail Film */
+.checked {
+    color: orange;
+}
+
+.time-video {
+    border-left: 1px solid white;
+}
+
+.h-pencarian {
+    min-height: 65vh;
+}
+
+.menu-dropdown {
+    width: 400px !important;
+}
+
+@media only screen and (min-width: 640px) {
+    .nav-menu {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .button-login {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .judul-hero {
+        line-height: 45px;
+    }
+    nav {
+        background-color: #000;
+    }
+}
