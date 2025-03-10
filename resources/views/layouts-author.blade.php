@@ -52,14 +52,13 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
                     </svg>
-
                     <span class="ms-3">Home</span>
                 </a>
             </li>
             <ul class="space-y-2 font-medium mt-5">
                 <li>
-                    <a href="{{ route('admin.dashboard.index') }}"
-                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('admin.dashboard.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                    <a href="{{ route('author.dashboard.index') }}"
+                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('author.dashboard.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                         <svg class="w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 22 21">
@@ -72,8 +71,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.film.index') }}"
-                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('admin.film.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                    <a href="{{ route('author.film.index') }}"
+                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('author.film.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                         <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
@@ -84,20 +83,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.genre.index') }}"
-                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('admin.genre.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
-                        <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-width="2"
-                                d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Genres</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.genre-relation.index') }}"
-                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('admin.genre-relation.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                    <a href="{{ route('author.genre-relation.index') }}"
+                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('author.genre-relation.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                         <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
@@ -108,41 +95,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.casting.index') }}"
-                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('admin.casting.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
+                    <a href="{{ route('author.casting.index') }}"
+                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('author.casting.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                         <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24 ">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2"
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14.079 6.839a3 3 0 0 0-4.255.1M13 20h1.083A3.916 3.916 0 0 0 18 16.083V9A6 6 0 1 0 6 9v7m7 4v-1a1 1 0 0 0-1-1h-1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1Zm-7-4v-6H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1Zm12-6h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1v-6Z" />
                         </svg>
                         <span class="flex-1 ms-3 whitespace-nowrap">Castings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.comment.index') }}"
-                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group  {{ Route::is('admin.comment.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
-                        <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Comments</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.user.index') }}"
-                        class="flex items-center p-2 text-gray-300 rounded-lg hover:bg-gray-700 group {{ Route::is('admin.user.index') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
-                        <svg class="shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 18">
-                            <path
-                                d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
                     </a>
                 </li>
                 <li>

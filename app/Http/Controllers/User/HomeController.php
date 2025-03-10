@@ -9,8 +9,13 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
+        $heroFilms = Film::withCount('comments') // Menghitung jumlah komentar
+        ->orderByDesc('comments_count') // Urutkan berdasarkan jumlah komentar terbanyak
+        ->limit(4) // Ambil hanya 5
+        ->get();    
+
         $films = Film::latest()->get();
-        return view('index', compact('films'));
+        return view('index', compact('heroFilms','films'));
 
     }
 }

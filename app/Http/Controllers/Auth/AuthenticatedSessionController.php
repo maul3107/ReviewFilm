@@ -31,8 +31,8 @@ class AuthenticatedSessionController extends Controller
         // Redirect berdasarkan role
         return match (Auth::user()->role) {
             'admin' => redirect()->route('admin.dashboard.index'),
-            'author' => redirect()->route('author.dashboard'),
-            default => redirect()->route('index'),
+            'author' => redirect()->route('author.dashboard.index'),
+            default => redirect()->route('dashboard'),
         };
     }
 

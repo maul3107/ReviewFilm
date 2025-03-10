@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,30 +12,43 @@
     {{-- Font Family --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     {{-- Font Awesome --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <section>
         @yield('styles')
     </section>
 </head>
+
 <body class="bg-black ">
     {{-- Navbar Start --}}
-    <nav class=" bg-black fixed top-0 left-0 w-full" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 0">
+    <nav class=" bg-black z-50 fixed top-0 left-0 w-full" x-data="{ mobileMenuOpen: false, scrolled: false }"
+        @scroll.window="scrolled = window.scrollY > 0">
         <div :class="scrolled ? 'bg-black' : 'bg-transparent'" class="transition-colors duration-300 mx-auto container">
             <div class="relative flex h-16 items-center">
                 <!-- Mobile menu button -->
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" :aria-expanded="mobileMenuOpen.toString()">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen"
+                        class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-controls="mobile-menu" :aria-expanded="mobileMenuOpen.toString()">
                         <span class="sr-only">Open main menu</span>
-                        <svg :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        <svg :class="{ 'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" class="block size-6"
+                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
-                        <svg :class="{ 'hidden': !mobileMenuOpen, 'block': mobileMenuOpen }" class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <svg :class="{ 'hidden': !mobileMenuOpen, 'block': mobileMenuOpen }" class="hidden size-6"
+                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -43,7 +57,10 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center ml-12 sm:ml-0">
                     <a href="#">
-                        <h2 class="logo text-blue-600 text-2xl font-black"><i class="fa-regular fa-circle-play"></i> <span class="text-2xl font-bold">Movies</span><span class="text-2xl font-bold text-blue-800">Ku</span></h2>
+                        <h2 class="logo text-blue-600 text-2xl font-black"><i class="fa-regular fa-circle-play"></i>
+                            <span class="text-2xl font-bold">Movies</span><span
+                                class="text-2xl font-bold text-blue-800">Ku</span>
+                        </h2>
                     </a>
                 </div>
 
@@ -51,9 +68,9 @@
                 <div class="flex-1 flex justify-center">
                     <div class="nav-menu hidden">
                         <div class="flex space-x-2">
-                            <a href="{{ route('index') }}"
+                            <a href="{{ route('dashboard') }}"
                                 class="rounded-md px-3 py-2 text-sm font-medium
-                                {{ Route::is('index') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}"
+                                {{ Route::is('dashboard') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}"
                                 aria-current="page">
                                 Home
                             </a>
@@ -67,65 +84,75 @@
                 </div>
 
                 @auth
-                <div class="relative inline-block text-left" x-data="{ open: false }">
-                    {{-- Profile Button --}}
-                    <button @click="open = !open" type="button"
-                        class="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-neutral-500 dark:text-neutral-400 bg-transparent hover:text-neutral-700 dark:hover:text-neutral-300 focus:outline-none transition ease-in-out duration-150">
-                        <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
-                        <div class="ms-3">
-                            @php
-                                $user = Auth::user();
-                                $avatar = $user->avatar ? Storage::url($user->avatar) : asset('storage/avatars/default-avatar.png');
-                            @endphp
-                            <img class="h-10 w-10 rounded-full object-cover" src="{{ $avatar }}" alt="{{ $user->name }}'s Avatar">
-                        </div>
-                    </button>
+                    <div class="relative inline-block text-left" x-data="{ open: false }">
+                        {{-- Profile Button --}}
+                        <button @click="open = !open" type="button"
+                            class="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-neutral-500 dark:text-neutral-400 bg-transparent hover:text-neutral-700 dark:hover:text-neutral-300 focus:outline-none transition ease-in-out duration-150">
+                            <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
+                            <div class="ms-3">
+                                @php
+                                    $user = Auth::user();
+                                    $avatar = $user->avatar
+                                        ? Storage::url($user->avatar)
+                                        : asset('storage/avatars/default-avatar.png');
+                                @endphp
+                                <img class="h-10 w-10 rounded-full object-cover" src="{{ $avatar }}"
+                                    alt="{{ $user->name }}'s Avatar">
+                            </div>
+                        </button>
 
-                    {{-- Dropdown Menu --}}
-                    <div x-show="open"
-                         @click.away="open = false"
-                         x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="transform opacity-0 scale-95"
-                         x-transition:enter-end="transform opacity-100 scale-100"
-                         x-transition:leave="transition ease-in duration-75"
-                         x-transition:leave-start="transform opacity-100 scale-100"
-                         x-transition:leave-end="transform opacity-0 scale-95"
-                         class="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                         style="display: none;">
-                        <div class="py-2">
-                            {{-- Profile Link --}}
-                            <a href="{{ route('profile.edit') }}"
-                                class="block px-8 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                Profile
-                            </a>
-
-                            {{-- Admin Dashboard Link --}}
-                            @if(Auth::user()->role === 'admin')
-                                <a href="{{ route('admin.dashboard.index') }}"
+                        {{-- Dropdown Menu --}}
+                        <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            style="display: none;">
+                            <div class="py-2">
+                                {{-- Profile Link --}}
+                                <a href="{{ route('profile.edit') }}"
                                     class="block px-8 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Dashboard
+                                    Profile
                                 </a>
-                            @endif
 
-                            {{-- Logout Form --}}
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit"
-                                    class="block w-full text-left px-8 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    Logout
-                                </button>
-                            </form>
+                                {{-- Admin & Author Dashboard Link --}}
+                                @php
+                                    $dashboardRoute =
+                                        Auth::user()->role === 'admin'
+                                            ? 'admin.dashboard.index'
+                                            : 'author.dashboard.index';
+                                @endphp
+
+                                @if (in_array(Auth::user()->role, ['admin', 'author']))
+                                    <a href="{{ route($dashboardRoute) }}"
+                                        class="block px-8 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        Dashboard
+                                    </a>
+                                @endif
+
+                                {{-- Logout Form --}}
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="block w-full text-left px-8 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endauth
 
 
 
                 @guest
                     <div class="flex sm:flex items-center">
-                        <a href="{{ route('login') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-1.5 md:py-2 mb-2 mt-2 me-2 md:me-2 focus:outline-none">Login</a>
-                        <a href="{{ route('register') }}" class="hidden text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-1.5 md:py-2 me-2 mt-2 md:me-0 mb-2">Register</a>
+                        <a href="{{ route('login') }}"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-1.5 md:py-2 mb-2 mt-2 me-2 md:me-2 focus:outline-none">Login</a>
+                        <a href="{{ route('register') }}"
+                            class="hidden text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-1.5 md:py-2 me-2 mt-2 md:me-0 mb-2">Register</a>
                     </div>
                 @endguest
 
@@ -135,9 +162,12 @@
         <!-- Mobile menu -->
         <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-black">
             <div class="space-y-1 px-4 pb-3 pt-2">
-                <a href="#" class="block rounded-md bg-gray-900 px-4 py-2 text-base font-medium text-white">Home</a>
-                <a href="#" class="block rounded-md px-4 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Movies</a>
-                <a href="#" class="block rounded-md px-4 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">More</a>
+                <a href="#"
+                    class="block rounded-md bg-gray-900 px-4 py-2 text-base font-medium text-white">Home</a>
+                <a href="#"
+                    class="block rounded-md px-4 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Movies</a>
+                <a href="#"
+                    class="block rounded-md px-4 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">More</a>
             </div>
         </div>
     </nav>
@@ -147,204 +177,30 @@
         @yield('content')
     </section>
 
-<!-- Footer container -->
-<footer
-class="bg-gray-900 text-gray-400 text-center text-surface/75 lg:text-left mt-20">
-<div
-  class="flex items-center justify-center py-6 lg:justify-between container m-auto">
-  <!-- Social network icons container -->
-  <div class="flex justify-center">
-    <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 320 512">
-        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-        <path
-          d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-      </svg>
-    </a>
-    <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4 ">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 512 512">
-        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-        <path
-          d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-      </svg>
-    </a>
-    <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 488 512">
-        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-        <path
-          d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-      </svg>
-    </a>
-    <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 448 512">
-        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-        <path
-          d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-      </svg>
-    </a>
-    <a href="#!" class="me-6 [&>svg]:h-4 [&>svg]:w-4">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 448 512">
-        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-        <path
-          d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
-      </svg>
-    </a>
-    <a href="#!" class="[&>svg]:h-4 [&>svg]:w-4">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 496 512">
-        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-        <path
-          d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-      </svg>
-    </a>
-  </div>
-</div>
-
-<!-- Main container div: holds the entire content of the footer, including four sections (TW Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. -->
-<div class="pb-10 text-center md:text-left container m-auto">
-  <div class="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-    <!-- TW Elements section -->
-    <div class="">
-        <!-- Logo -->
-        <div class="flex-shrink-0 flex items-center ml-12 sm:ml-0">
-            <a href="#">
-                <h2 class="logo text-blue-600 text-2xl font-black"><i class="fa-regular fa-circle-play"></i> <span class="text-2xl font-bold">Movies</span><span class="text-2xl font-bold text-blue-800">Ku</span></h2>
-            </a>
+    <!-- Footer container -->
+    <footer class="bg-white mt-20 shadow-sm m-4 dark:bg-gray-800">
+        <div class="container m-auto py-4 md:flex md:items-center md:justify-between px-2 md:px-0">
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="#"
+                    class="hover:underline">MoviesKu™</a>. All Rights Reserved.
+            </span>
+            <ul
+                class="flex flex-wrap items-center gap-4 md:gap-6 mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+                <li>
+                    <a href="#" class="hover:underline mr-4 md:pr-6">About</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline mr-4 md:pr-6">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline mr-4 md:pr-6">Film</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline">Contact</a>
+                </li>
+            </ul>
         </div>
-      <p class="mt-3">
-        Here you can use rows and columns to organize your footer
-        content. Lorem ipsum dolor sit amet, consectetur adipisicing
-        elit.
-      </p>
-    </div>
-    <!-- Products section -->
-    <div>
-      <h6
-        class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-        Products
-      </h6>
-      <p class="mb-4">
-        <a href="#!">Angular</a>
-      </p>
-      <p class="mb-4">
-        <a href="#!">React</a>
-      </p>
-      <p class="mb-4">
-        <a href="#!">Vue</a>
-      </p>
-      <p>
-        <a href="#!">Laravel</a>
-      </p>
-    </div>
-    <!-- Useful links section -->
-    <div>
-      <h6
-        class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-        Useful links
-      </h6>
-      <p class="mb-4">
-        <a href="#!">Pricing</a>
-      </p>
-      <p class="mb-4">
-        <a href="#!">Settings</a>
-      </p>
-      <p class="mb-4">
-        <a href="#!">Orders</a>
-      </p>
-      <p>
-        <a href="#!">Help</a>
-      </p>
-    </div>
-    <!-- Contact section -->
-    <div>
-      <h6
-        class="mb-4 flex justify-center font-semibold uppercase md:justify-start">
-        Contact
-      </h6>
-      <p class="mb-4 flex items-center justify-center md:justify-start">
-        <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor">
-            <path
-              d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
-            <path
-              d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
-          </svg>
-        </span>
-        New York, NY 10012, US
-      </p>
-      <p class="mb-4 flex items-center justify-center md:justify-start">
-        <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor">
-            <path
-              d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
-            <path
-              d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
-          </svg>
-        </span>
-        info@example.com
-      </p>
-      <p class="mb-4 flex items-center justify-center md:justify-start">
-        <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor">
-            <path
-              fill-rule="evenodd"
-              d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
-              clip-rule="evenodd" />
-          </svg>
-        </span>
-        + 01 234 567 88
-      </p>
-      <p class="flex items-center justify-center md:justify-start">
-        <span class="me-3 [&>svg]:h-5 [&>svg]:w-5">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor">
-            <path
-              fill-rule="evenodd"
-              d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 003 3h.27l-.155 1.705A1.875 1.875 0 007.232 22.5h9.536a1.875 1.875 0 001.867-2.045l-.155-1.705h.27a3 3 0 003-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0018 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM16.5 6.205v-2.83A.375.375 0 0016.125 3h-8.25a.375.375 0 00-.375.375v2.83a49.353 49.353 0 019 0zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 01-.374.409H7.232a.375.375 0 01-.374-.409l.526-5.784a.373.373 0 01.333-.337 41.741 41.741 0 018.566 0zm.967-3.97a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H18a.75.75 0 01-.75-.75V10.5zM15 9.75a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V10.5a.75.75 0 00-.75-.75H15z"
-              clip-rule="evenodd" />
-          </svg>
-        </span>
-        + 01 234 567 89
-      </p>
-    </div>
-  </div>
-</div>
+    </footer>
 
-<!--Copyright section-->
-<div class="bg-black/5 py-2 text-center text-md">
-  <span>© 2025 Copyright</span>
-  <a class="font-semibold" href="https://tw-elements.com/"
-    >MovieKu</a
-  >
-</div>
-</footer>
 </body>
+
 </html>

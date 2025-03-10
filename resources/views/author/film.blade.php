@@ -1,16 +1,16 @@
-@extends('layouts-admin')
+@extends('layouts-author')
 
 @section('content')
     <div class="relative overflow-x-auto sm:rounded-lg">
         <div class="flex flex-col sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
             <div>
-                <a href="{{ route('admin.create-film') }}"
+                <a href="{{ route('author.create-film') }}"
                     class="inline-flex items-center text-white font-medium rounded-lg text-sm px-3 py-2 bg-blue-600">
                     Tambah Data
                 </a>
             </div>
             <div class="relative">
-                <form method="GET" action="{{ route('admin.film.index') }}">
+                <form method="GET" action="{{ route('author.film.index') }}">
                     @csrf
                     <div class="absolute inset-y-0 left-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -33,7 +33,6 @@
                     <th class="border border-gray-300 px-6 py-3">Id</th>
                     <th class="border border-gray-300 px-6 py-3">Title</th>
                     <th class="border border-gray-300 px-6 py-3">Poster</th>
-                    <th class="border border-gray-300 px-6 py-3">Creator</th>
                     <th class="border border-gray-300 px-6 py-3">Trailer</th>
                     <th class="border border-gray-300 px-6 py-3">Action</th>
                 </tr>
@@ -47,33 +46,32 @@
                             <img src="{{ asset('storage/assets/' . $film->poster) }}" alt="Poster"
                                 class="w-20 h-28 object-cover rounded-lg">
                         </td>
-                        <td class="border border-gray-300 px-6 py-4">{{ $film->creator }}</td>
                         <td class="border border-gray-300 px-6 py-4">
                             <a href="{{ $film->trailer }}" target="_blank" class="text-blue-600 hover:underline">Watch</a>
                         </td>
-                        <td class=" px-6 py-4 flex space-x-3">
-                            <a href="{{ route('admin.edit-film', $film->id) }}" class="text-yellow-500 hover:underline">
-                                <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-width="2"
-                                        d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                    <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-                            </a>
-                            <form action="{{ route('admin.delete-film', $film->id) }}" method="POST"
-                                class="inline delete-form" data-title="{{ $film->title }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:underline">
+                            <td class=" px-6 py-4 justify-center items-center space-x-3">
+                                <a href="{{ route('author.edit-film', $film->id) }}" class="text-yellow-500 hover:underline">
                                     <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                        <path stroke="currentColor" stroke-width="2"
+                                            d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     </svg>
-                                </button>
-                            </form>
-                        </td>
+                                </a>
+                                <form action="{{ route('author.delete-film', $film->id) }}" method="POST"
+                                    class="inline delete-form" data-title="{{ $film->title }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline">
+                                        <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -83,6 +81,7 @@
             {{ $films->appends(request()->query())->links() }}
         </div>
     </div>
+
     @if (session('success'))
         <script>
             Swal.fire({
