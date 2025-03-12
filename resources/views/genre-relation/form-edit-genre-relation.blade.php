@@ -1,8 +1,8 @@
-@extends('layouts-admin')
+@extends(auth()->user()->role == 'author' ? 'layouts-author' : 'layouts-admin')
 
 @section('content')
     <div>
-        <a href="{{ route('admin.genre-relation.index') }}"
+        <a href="{{ route(auth()->user()->role == 'author' ? 'author.genre-relation.index' : 'admin.genre-relation.index') }}"
             class="rollback text-white py-2 px-4 rounded-full w-10 h-10 z-10 text-lg">&#10094;</a>
     </div>
 
@@ -18,8 +18,9 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.update-genre-relation', $film->id) }}" method="POST"
-        class="form-input-data w-full container m-auto mt-5 p-10 rounded-lg">
+    <form
+        action="{{ route(auth()->user()->role == 'author' ? 'author.update-genre-relation' : 'admin.update-genre-relation', $film->id) }}"
+        method="POST" class="form-input-data w-full container m-auto mt-5 p-10 rounded-lg">
         @csrf
         @method('PUT')
 

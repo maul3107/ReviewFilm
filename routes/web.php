@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\FilmController as AdminFilmController;
 use App\Http\Controllers\Author\FilmController as AuthorFilmController;
 use App\Http\Controllers\Admin\GenreController as AdminGenreController;
 use App\Http\Controllers\Admin\GenreRelationController as AdminGenreRelationController;
+use App\Http\Controllers\Author\GenreRelationController as AuthorGenreRelationController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\CastingController as AdminCastingController;
+use App\Http\Controllers\Author\CastingController as AuthorCastingController;
 use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\CommentController as UserCommentController;
@@ -94,11 +96,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::middleware(['auth', 'role:author'])->prefix('author')->name('author.')->group(function () {
     Route::get('/', [AdminIndexController::class, 'index'])->name('index');
     Route::get('/dashboard', [AuthorDashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/genre', [AdminGenreController::class, 'index'])->name('genre.index');
-    Route::get('/genre-relation', [AdminGenreRelationController::class, 'index'])->name('genre-relation.index');
-    Route::get('/casting', [AdminCastingController::class, 'index'])->name('casting.index');
-    Route::get('/comment', [AdminCommentController::class, 'index'])->name('comment.index');
-    Route::get('/user', [AdminUserController::class, 'index'])->name('user.index');
+    Route::get('/genre-relation', [AuthorGenreRelationController::class, 'index'])->name('genre-relation.index');
+    Route::get('/casting', [AuthorCastingController::class, 'index'])->name('casting.index');
+
 
     // Film Author
     Route::get('/film', [AuthorFilmController::class, 'index'])->name('film.index');
@@ -108,20 +108,19 @@ Route::middleware(['auth', 'role:author'])->prefix('author')->name('author.')->g
     Route::put('/update-film/{id}', [AuthorFilmController::class, 'update'])->name('update-film');
     Route::delete('/delete-film/{id}', [AuthorFilmController::class, 'destroy'])->name('delete-film');
 
-    // Genre Admin
-    Route::get('/genre/{slug}', [AdminGenreController::class, 'detailGenre'])->name('detail-genre');
-    Route::get('/create-genre', [AdminGenreController::class, 'create'])->name('create-genre');
-    Route::post('/store-genre', [AdminGenreController::class, 'store'])->name('store-genre');
-    Route::get('/edit-genre/{id}', [AdminGenreController::class, 'edit'])->name('edit-genre');
-    Route::put('/update-genre/{id}', [AdminGenreController::class, 'update'])->name('update-genre');
-    Route::delete('/delete-genre/{id}', [AdminGenreController::class, 'destroy'])->name('delete-genre');
+    // Genre Relation Author
+    Route::get('/create-genre-relation', [AuthorGenreRelationController::class, 'create'])->name('create-genre-relation');
+    Route::post('/store-genre-relation', [AuthorGenreRelationController::class, 'store'])->name('store-genre-relation');
+    Route::get('/edit-genre-relation/{id}', [AuthorGenreRelationController::class, 'edit'])->name('edit-genre-relation');
+    Route::put('/update-genre-relation/{id}', [AuthorGenreRelationController::class, 'update'])->name('update-genre-relation');
+    Route::delete('/delete-genre-relation/{id}', [AuthorGenreRelationController::class, 'destroy'])->name('delete-genre-relation');
 
-    // Genre Relation Admin
-    Route::get('/create-genre-relation', [AdminGenreRelationController::class, 'create'])->name('create-genre-relation');
-    Route::post('/store-genre-relation', [AdminGenreRelationController::class, 'store'])->name('store-genre-relation');
-    Route::get('/edit-genre-relation/{id}', [AdminGenreRelationController::class, 'edit'])->name('edit-genre-relation');
-    Route::put('/update-genre-relation/{id}', [AdminGenreRelationController::class, 'update'])->name('update-genre-relation');
-    Route::delete('/delete-genre-relation/{id}', [AdminGenreRelationController::class, 'destroy'])->name('delete-genre-relation');
+    // Casting Author
+    Route::get('/create-casting', [AuthorCastingController::class, 'create'])->name('create-casting');
+    Route::post('/store-casting', [AuthorCastingController::class, 'store'])->name('store-casting');
+    Route::get('/edit-casting/{id}', [AuthorCastingController::class, 'edit'])->name('edit-casting');
+    Route::put('/update-casting/{id}', [AuthorCastingController::class, 'update'])->name('update-casting');
+    Route::delete('/delete-casting/{id}', [AuthorCastingController::class, 'destroy'])->name('delete-casting');
 
 });
 

@@ -19,6 +19,7 @@ class Casting extends Model
         'stage_name',
         'real_name',
         'film_id',
+        'user_id',
     ];
 
     public function film()

@@ -1,12 +1,12 @@
-@extends('layouts-admin')
+@extends(auth()->user()->role == 'author' ? 'layouts-author' : 'layouts-admin')
 
 @section('content')
     <div>
-        <a href="{{ route('admin.casting.index') }}"
+        <a href="{{ route(auth()->user()->role == 'author' ? 'author.casting.index' : 'admin.casting.index') }}"
             class="rollback text-white py-2 px-4 rounded-full w-10 h-10 z-10 text-lg">&#10094;</a>
     </div>
-    <form action="{{ route('admin.store-casting') }}" method="POST"
-        class="form-input-data w-full container m-auto mt-5 p-10 rounded-lg" enctype="multipart/form-data">
+    <form action="{{ route(auth()->user()->role == 'author' ? 'author.store-casting' : 'admin.store-casting') }}"
+        method="POST" class="form-input-data w-full container m-auto mt-5 p-10 rounded-lg" enctype="multipart/form-data">
         @csrf
         <h1 class="text-3xl text-gray-800 font-bold mb-5">Form Tambah Casting</h1>
 
