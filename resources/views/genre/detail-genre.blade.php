@@ -32,7 +32,7 @@
 
     <style>
         .con {
-            min-height: 57vh;
+            min-height: 100vh;
         }
 
         .film-card {

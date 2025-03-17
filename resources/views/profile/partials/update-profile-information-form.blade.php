@@ -19,12 +19,15 @@
 
         <div>
             <x-input-label for="avatar" :value="__('Avatar')" class="text-white" />
-            <input id="avatar" name="avatar" type="file" class="mt-1 block w-full p-2 text-white bg-gray-800 border border-gray-700 rounded-md" accept="image/*" />
+            <input id="avatar" name="avatar" type="file"
+                class="mt-1 block w-full p-2 text-white bg-gray-800 border border-gray-700 rounded-md"
+                accept="image/*" />
             <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
 
             @if ($user->avatar)
                 <div class="mt-2">
-                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar" class="w-24 h-24 rounded-full border border-gray-700">
+                    <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar"
+                        class="w-24 h-24 object-cover rounded-full border border-gray-700">
                 </div>
             @endif
         </div>

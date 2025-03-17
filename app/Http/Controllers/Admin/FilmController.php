@@ -121,6 +121,18 @@ class FilmController extends Controller
     {
         $film = Film::findOrFail($id);
 
+        $film->castings()->delete();
+        $film->comments()->delete();
+        $film->genres()->detach();
+
+
+        if ($film->poster) {
+            $posterPath = public_path('storage/assets/' . $film->poster);
+            if (file_exists($posterPath) && is_file($posterPath)) {
+                unlink($posterPath);
+            }
+        }
+
         $film->delete();
 
         return redirect()

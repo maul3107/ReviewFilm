@@ -51,7 +51,7 @@ class GenreRelationController extends Controller
     public function create()
     {
         $genres = Genre::all();
-        $films = Film::all();
+        $films = Film::whereDoesntHave('genres')->get();
         return view('genre-relation.form-tambah-genre-relation', compact('genres', 'films'));
     }
 

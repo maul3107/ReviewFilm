@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index(){
-        $films = Film::latest()->get();
-        return view('index', compact('films'));
+    public function index()
+    {
+        $films = Film::latest()->paginate(10);
 
+        return view('index', compact('films'));
     }
 }

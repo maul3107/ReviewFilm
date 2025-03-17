@@ -28,7 +28,8 @@
                     <option value="">Pilih Film</option>
                     @foreach ($films as $film)
                         <option value="{{ $film->id }}" {{ old('film_id') == $film->id ? 'selected' : '' }}>
-                            {{ $film->title }}</option>
+                            {{ $film->title }}
+                        </option>
                     @endforeach
                 </select>
                 @error('film_id')

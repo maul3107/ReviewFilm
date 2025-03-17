@@ -18,7 +18,7 @@
     {{-- Font Awesome --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     {{-- Swiper --}}
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     {{-- Jquery --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -56,7 +56,7 @@
 
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center ml-12 sm:ml-0">
-                    <a href="#">
+                    <a href="{{ route('dashboard') }}">
                         <h2 class="logo text-blue-600 text-2xl font-black"><i class="fa-regular fa-circle-play"></i>
                             <span class="text-2xl font-bold">Movies</span><span
                                 class="text-2xl font-bold text-blue-800">Ku</span>
@@ -162,12 +162,10 @@
         <!-- Mobile menu -->
         <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-black">
             <div class="space-y-1 px-4 pb-3 pt-2">
-                <a href="#"
+                <a href="{{ route('dashboard') }}"
                     class="block rounded-md bg-gray-900 px-4 py-2 text-base font-medium text-white">Home</a>
-                <a href="#"
-                    class="block rounded-md px-4 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Movies</a>
-                <a href="#"
-                    class="block rounded-md px-4 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">More</a>
+                <a href="{{ route('semua-film') }}"
+                    class="block rounded-md px-4 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Film</a>
             </div>
         </div>
     </nav>
@@ -178,7 +176,7 @@
     </section>
 
     <!-- Footer container -->
-    <footer class="bg-white mt-20 shadow-sm m-4 dark:bg-gray-800">
+    <footer class="w-full mt-20 shadow-sm bg-gray-800">
         <div class="container m-auto py-4 md:flex md:items-center md:justify-between px-2 md:px-0">
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2025 <a href="#"
                     class="hover:underline">MoviesKu™</a>. All Rights Reserved.
@@ -186,16 +184,16 @@
             <ul
                 class="flex flex-wrap items-center gap-4 md:gap-6 mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
                 <li>
-                    <a href="#" class="hover:underline mr-4 md:pr-6">About</a>
+                    <a href="{{ url('/#about') }}" class="hover:underline mr-4 md:pr-6">About</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline mr-4 md:pr-6">Privacy Policy</a>
+                    <a href="{{ url('/#trailers') }}" class="hover:underline mr-4 md:pr-6">Trailer</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline mr-4 md:pr-6">Film</a>
+                    <a href="{{ route('semua-film') }}" class="hover:underline mr-4 md:pr-6">Film</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline">Contact</a>
+                    <a href="{{ url('/#contact') }}" class="hover:underline">Contact</a>
                 </li>
             </ul>
         </div>

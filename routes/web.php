@@ -16,10 +16,13 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\User\CommentController as UserCommentController;
 use App\Http\Controllers\User\DetailFilmController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\User\SemuaFilmController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+
 
 
 // Comment Routes

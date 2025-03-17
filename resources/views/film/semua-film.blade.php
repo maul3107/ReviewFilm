@@ -1,7 +1,7 @@
 @extends('layouts')
 
 @section('content')
-    <div class="judul container m-auto mt-20 flex justify-start items-center gap-5 px-3 md:px-0">
+    <div class="judul container m-auto mt-20 flex justify-start items-center gap-5 px-3">
         <div x-data="searchFilms()" class="w-full">
             <form @submit.prevent="searchFilms()" class="relative flex items-center gap-2">
                 @csrf
@@ -23,7 +23,7 @@
             </form>
             @csrf
             <!-- Menampilkan hasil pencarian -->
-            <div class="mt-5 h-pencarian" x-show="query.length > 0">
+            <div class="min-h-screen" x-show="query.length > 0">
                 <template x-if="loading">
                     <div class="text-white text-center">
                         <p>Mencari film...</p>
@@ -32,7 +32,7 @@
 
                 <template x-if="!loading && results.length > 0">
                     <div>
-                        <h2 class="text-white text-lg">Hasil Pencarian:</h2>
+                        <h2 class="text-white text-lg pt-5">Hasil Pencarian:</h2>
                         <div
                             class="container m-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 mt-5">
                             <template x-for="film in results" :key="film.id">
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Menampilkan genre dan semua film jika pencarian kosong -->
-            <div x-show="query.length === 0">
+            <div class="min-h-screen" x-show="query.length === 0">
                 {{-- Genre Start --}}
                 <div class="judul container m-auto mt-10 px-3 md:px-0">
                     <h1 class="judul-hero text-white text-xl sm:text-2xl md:text-left">
