@@ -23,7 +23,7 @@
                                         class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5">
                                         Watch Trailer <i class="fa-solid fa-circle-play"></i>
                                     </button>
-                                    <a href="{{ route('detail-film', $heroFilm->id) }}"
+                                    <a href="{{ route('detail-film', $heroFilm->slug) }}"
                                         class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-md text-sm px-5 py-2.5 ml-2">
                                         More Info
                                     </a>
@@ -73,7 +73,7 @@
                 <div class="swiper-wrapper">
                     @foreach ($films as $film)
                         <div class="swiper-slide w-full">
-                            <a href="{{ route('detail-film', $film->id) }}" class="film-card block">
+                            <a href="{{ route('detail-film', $heroFilm->slug) }}" class="film-card block">
                                 <div class="img-wrapper">
                                     <img src="{{ asset('storage/assets/' . $film->poster) }}" class="rounded-lg shadow-lg"
                                         alt="{{ $film->title }}">
@@ -410,6 +410,20 @@
 
         <!-- Contact Form -->
         <div id="contact" class="lg:w-1/2 p-5 rounded-xl shadow-2xl w-full border border-gray-700">
+            @if (session('success'))
+                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition
+                    class="mb-4 p-4 text-green-700 bg-green-200 border border-green-500 rounded-lg">
+                    {{ session('success') }}
+                </div>
+
+                <!-- JavaScript Redirect ke #contact -->
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        window.location.hash = 'contact';
+                    });
+                </script>
+            @endif
+
             <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
                 @csrf
                 <div>
@@ -432,11 +446,14 @@
                 </div>
                 <div class="text-center">
                     <button type="submit"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl">Kirim
-                        Pesan</button>
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl">
+                        Kirim Pesan
+                    </button>
                 </div>
             </form>
         </div>
+
+
     </div>
     <!-- Add the trailer section Alpine.js script -->
     <script>

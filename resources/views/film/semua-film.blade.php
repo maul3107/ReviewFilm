@@ -1,7 +1,7 @@
 @extends('layouts')
 
 @section('content')
-    <div class="judul container m-auto mt-20 flex justify-start items-center gap-5 px-3">
+    <div class="judul container m-auto mt-20 flex justify-start items-center gap-5 px-3 md:px-0">
         <div x-data="searchFilms()" class="w-full">
             <form @submit.prevent="searchFilms()" class="relative flex items-center gap-2">
                 @csrf
@@ -35,8 +35,8 @@
                         <h2 class="text-white text-lg pt-5">Hasil Pencarian:</h2>
                         <div
                             class="container m-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 mt-5">
-                            <template x-for="film in results" :key="film.id">
-                                <a :href="'/detail-film/' + film.id" class="film-card block relative">
+                            <template x-for="film in results" :key="film.slug">
+                                <a :href="'/film/' + film.slug" class="film-card block relative">
                                     <div class="img-wrapper">
                                         <img :src="'/storage/assets/' + film.poster" class="rounded-lg shadow-lg"
                                             :alt="film.title">
@@ -84,7 +84,7 @@
                 <div
                     class="container m-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 mt-5">
                     @foreach ($films as $film)
-                        <a href="{{ route('detail-film', $film->id) }}" class="film-card block relative">
+                        <a href="{{ route('detail-film', $film->slug) }}" class="film-card block relative">
                             <div class="img-wrapper">
                                 <img src="{{ asset('storage/assets/' . $film->poster) }}" class="rounded-lg shadow-lg"
                                     alt="{{ $film->title }}">

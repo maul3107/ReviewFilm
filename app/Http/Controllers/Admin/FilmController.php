@@ -21,13 +21,6 @@ class FilmController extends Controller
         return view('admin.film',compact('films'));
     }
 
-
-    public function detailFilm($id){
-        $film = Film::findOrFail($id);
-        $relatedFilms = Film::where('id', '!=', $id)->limit(3)->get();
-        return view('film.detail-film',compact('film'));
-    }
-
     public function create(){
         return view('film.form-tambah-film');
     }
@@ -40,6 +33,7 @@ class FilmController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:80',
+            'slug' => 'required|string|max:80|unique:films,slug',
             'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string|max:255',
             'release_year' => 'required|integer|min:1800|max:' . date('Y'),
@@ -55,8 +49,9 @@ class FilmController extends Controller
         }
 
         Film::create([
-            'id' => Str::uuid(), // Gunakan UUID jika bukan auto-increment
+            'id' => Str::uuid(),
             'title' => $request->input('title'),
+            'slug' => Str::slug($request->input('slug')),
             'poster' => $imageName,
             'description' => $request->input('description'),
             'release_year' => $request->input('release_year'),
@@ -68,7 +63,6 @@ class FilmController extends Controller
 
         return redirect()->route('admin.film.index')->with('success', 'Film berhasil ditambahkan!');
     }
-
 
     public function edit($id)
     {
@@ -82,6 +76,7 @@ class FilmController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:80',
+            'slug' => 'required|string|max:80|unique:films,slug,' . $film->id,
             'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string|max:255',
             'release_year' => 'required|integer|min:1800|max:' . date('Y'),
@@ -93,7 +88,6 @@ class FilmController extends Controller
         if ($request->hasFile('poster')) {
             if ($film->poster) {
                 $oldPosterPath = public_path('storage/assets/' . $film->poster);
-
                 if (file_exists($oldPosterPath) && is_file($oldPosterPath)) {
                     unlink($oldPosterPath);
                 }
@@ -105,6 +99,7 @@ class FilmController extends Controller
 
         $film->update([
             'title' => $request->input('title'),
+            'slug' => Str::slug($request->input('slug')),
             'poster' => $film->poster,
             'description' => $request->input('description'),
             'release_year' => $request->input('release_year'),
@@ -124,7 +119,6 @@ class FilmController extends Controller
         $film->castings()->delete();
         $film->comments()->delete();
         $film->genres()->detach();
-
 
         if ($film->poster) {
             $posterPath = public_path('storage/assets/' . $film->poster);

@@ -18,7 +18,7 @@
             <p class="text-white text-center col-span-full h-pencarian">Tidak ada film yang tersedia.</p>
         @else
             @foreach ($films as $film)
-                <a href="{{ route('detail-film', ['id' => $film->id]) }}" class="film-card block relative">
+                <a href="{{ route('detail-film', ['slug' => $film->slug]) }}" class="film-card block relative">
                     <div class="img-wrapper">
                         <img src="{{ asset('storage/assets/' . $film->poster) }}" class="rounded-lg shadow-lg"
                             alt="{{ $film->title }}">

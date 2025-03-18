@@ -25,7 +25,8 @@ class SemuaFilmController extends Controller
         }
 
         $films = Film::where('title', 'like', '%' . $query . '%')
-                     ->get(['id', 'title', 'poster']);
+            ->get(['id', 'title', 'slug', 'poster']);
+
 
         return response()->json($films);
     }

@@ -19,6 +19,7 @@ class Film extends Model
     protected $fillable = [
         'id',
         'title',
+        'slug',
         'poster',
         'description',
         'release_year',
@@ -40,6 +41,10 @@ class Film extends Model
                 $film->id = (string) Str::uuid();
             }
         });
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug'; // Gunakan slug sebagai parameter pencarian di route model binding
     }
 
     public function genres()

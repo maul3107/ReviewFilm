@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class DetailFilmController extends Controller
 {
-    public function detailFilm($id)
+    public function detailFilm($slug)
     {
-        $film = Film::with('comments.user')->findOrFail($id);
+        $film = Film::with('comments.user')->where('slug', $slug)->firstOrFail();
         $userId = Auth::id();
 
         // Ambil komentar user yang sedang login (jika ada)
@@ -39,12 +39,12 @@ class DetailFilmController extends Controller
         // Cek apakah user sudah memberikan komentar
         $userHasCommented = !is_null($userComment);
 
-        $randomFilms = Film::where('id', '!=', $id)
+        $randomFilms = Film::where('id', '!=', $film->id) // Pakai id asli dari film yang ditemukan
         ->with(['comments'])
         ->inRandomOrder()
         ->limit(10)
         ->get();
 
-        return view('film.detail-film', compact('film', 'filteredAverage', 'filteredNumberOfComments', 'userHasCommented', 'commentsNew','randomFilms'));
+        return view('film.detail-film', compact('film', 'filteredAverage', 'filteredNumberOfComments', 'userHasCommented', 'commentsNew', 'randomFilms'));
     }
 }

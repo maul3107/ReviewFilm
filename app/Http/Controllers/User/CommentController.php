@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Film; // Tambahkan model Film
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,13 +22,16 @@ class CommentController extends Controller
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
+        // Ambil slug berdasarkan film_id
+        $film = Film::findOrFail($request->film_id);
+
         // Cek apakah user sudah memiliki komentar pada film ini
         $existingComment = Comment::where('film_id', $request->film_id)
             ->where('user_id', Auth::id())
             ->first();
 
         if ($existingComment) {
-            return redirect()->route('detail-film', ['id' => $request->film_id])
+            return redirect()->route('detail-film', ['slug' => $film->slug])
                 ->with('error', 'Anda sudah memberikan komentar pada film ini. Silakan edit komentar Anda.');
         }
 
@@ -39,7 +43,7 @@ class CommentController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return redirect()->route('detail-film', ['id' => $request->film_id])
+        return redirect()->route('detail-film', ['slug' => $film->slug])
             ->with('success', 'Komentar dan rating berhasil ditambahkan!');
     }
 
@@ -47,7 +51,6 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
-        // Pastikan user hanya bisa mengedit komentarnya sendiri
         if ($comment->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'Aksi tidak diizinkan.');
         }
@@ -62,7 +65,10 @@ class CommentController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return redirect()->route('detail-film', ['id' => $comment->film_id])
+        // Ambil slug berdasarkan film_id
+        $film = Film::findOrFail($comment->film_id);
+
+        return redirect()->route('detail-film', ['slug' => $film->slug])
             ->with('success', 'Komentar dan rating berhasil diperbarui!');
     }
 
@@ -70,15 +76,15 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
-        // Pastikan user hanya bisa menghapus komentarnya sendiri
         if ($comment->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'Aksi tidak diizinkan.');
         }
 
-        $filmId = $comment->film_id;
+        // Ambil slug sebelum menghapus
+        $film = Film::findOrFail($comment->film_id);
         $comment->delete();
 
-        return redirect()->route('detail-film', ['id' => $filmId])
+        return redirect()->route('detail-film', ['slug' => $film->slug])
             ->with('success', 'Komentar berhasil dihapus!');
     }
 }

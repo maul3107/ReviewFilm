@@ -33,8 +33,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Film
-Route::get('/detail-film/{id}', [DetailFilmController::class, 'detailFilm'])->name('detail-film');
-Route::get('/semua-film', [SemuaFilmController::class, 'pencarianFilm'])->name('semua-film');
+Route::get('/film/{slug}', [DetailFilmController::class, 'detailFilm'])->name('detail-film');
+Route::get('/film', [SemuaFilmController::class, 'pencarianFilm'])->name('semua-film');
 Route::get('/api/search', [SemuaFilmController::class, 'apiSearch']);
 
 // Detail Genre (Bisa diakses semua user)

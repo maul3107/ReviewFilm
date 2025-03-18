@@ -5,8 +5,8 @@
         <a
             href="{{ route(auth()->user()->role == 'author' ? 'author.film.index' : 'admin.film.index') }}"class="rollback text-white py-2 px-4 rounded-full w-10 h-10 z-10 text-lg">&#10094;</a>
     </div>
-    <form action="{{ route(auth()->user()->role == 'author' ? 'author.update-film' : 'admin.update-film', $film->id) }}" method="POST"
-        class="form-input-data w-full container m-auto mt-5 p-10 rounded-lg" enctype="multipart/form-data">
+    <form action="{{ route(auth()->user()->role == 'author' ? 'author.update-film' : 'admin.update-film', $film->id) }}"
+        method="POST" class="form-input-data w-full container m-auto mt-5 p-10 rounded-lg" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -26,6 +26,22 @@
                 @enderror
             </div>
         </div>
+
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="slug">
+                    Slug
+                </label>
+                <input
+                    class="appearance-none block w-full bg-gray-100 text-gray-700 border {{ $errors->has('slug') ? 'border-red-500' : 'border-gray-400' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="slug" type="text" name="slug" placeholder="Enter movie slug"
+                    value="{{ old('slug', $film->slug ?? '') }}">
+                @error('slug')
+                    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
 
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">

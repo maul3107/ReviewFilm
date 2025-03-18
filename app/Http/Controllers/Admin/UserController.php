@@ -96,6 +96,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $user->comments()->delete();
+
         if ($user->avatar) {
             Storage::disk('public')->delete($user->avatar);
         }

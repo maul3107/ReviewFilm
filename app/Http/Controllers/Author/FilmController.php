@@ -13,13 +13,13 @@ class FilmController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search', '');
-        $userId = auth()->id(); // Ambil ID user yang sedang login
+        $userId = auth()->id();
 
-        $films = Film::where('user_id', $userId) // Hanya menampilkan film yang diunggah oleh user
+        $films = Film::where('user_id', $userId)
             ->when($search, function ($query, $search) {
                 return $query->where('title', 'like', "%{$search}%");
             })
-            ->latest() // Menampilkan film terbaru terlebih dahulu
+            ->latest()
             ->paginate(7);
 
         return view('author.film', compact('films'));
@@ -37,6 +37,7 @@ class FilmController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:80',
+            'slug' => 'required|string|max:80',
             'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string|max:255',
             'release_year' => 'required|integer|min:1800|max:' . date('Y'),
@@ -52,8 +53,9 @@ class FilmController extends Controller
         }
 
         Film::create([
-            'id' => Str::uuid(), // Gunakan UUID jika bukan auto-increment
+            'id' => Str::uuid(),
             'title' => $request->input('title'),
+            'slug' => $request->input('slug'),
             'poster' => $imageName,
             'description' => $request->input('description'),
             'release_year' => $request->input('release_year'),
@@ -79,6 +81,7 @@ class FilmController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:80',
+            'slug' => 'required|string|max:80',
             'poster' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string|max:255',
             'release_year' => 'required|integer|min:1800|max:' . date('Y'),
@@ -102,6 +105,7 @@ class FilmController extends Controller
 
         $film->update([
             'title' => $request->input('title'),
+            'slug' => $request->input('slug'),
             'poster' => $film->poster,
             'description' => $request->input('description'),
             'release_year' => $request->input('release_year'),
