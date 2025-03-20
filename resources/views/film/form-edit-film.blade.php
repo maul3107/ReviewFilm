@@ -199,7 +199,7 @@
 
                             <div class="w-full md:w-2/5 px-3 flex items-center">
                                 <input
-                                    class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                    class="appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-0 px-0 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                                     type="file" name="photo[]" accept="image/*">
 
                                 @if ($casting->photo)
@@ -280,7 +280,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.getElementById('castings-container');
             const addButton = document.getElementById('add-casting');
-            const templateItem = document.querySelector('.casting-item'); // Simpan template asli
+            const templateItem = document.querySelector('.casting-item'); 
 
             addButton.addEventListener('click', function() {
                 let newItem;
