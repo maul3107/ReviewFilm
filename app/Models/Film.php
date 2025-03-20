@@ -20,6 +20,7 @@ class Film extends Model
         'id',
         'title',
         'slug',
+        'age',
         'poster',
         'description',
         'release_year',

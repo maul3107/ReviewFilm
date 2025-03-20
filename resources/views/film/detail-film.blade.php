@@ -12,14 +12,37 @@
                 <div class="flex-1 max-w-3xl">
                     <h1 class="text-3xl text-white">{{ $film->title }} ({{ $film->release_year }})</h1>
                     <div class="director">
-                        <h2 class="text-gray-300">Director By <span class="font-bold">{{ $film->creator }}</span></h2>
+                        <h2 class="text-gray-300">Film By <span class="font-bold">{{ $film->creator }}</span></h2>
                     </div>
-                    <div class="my-5">
-                        @foreach ($film->genres as $genre)
-                            <span class="bg-gray-200 text-sm px-4 py-1 rounded-full mr-2">{{ $genre->title }}</span>
+                    <div class="my-3">
+                        @php
+                            $colors = [
+                                'bg-blue-500',
+                                'bg-green-500',
+                                'bg-red-500',
+                                'bg-yellow-500',
+                                'bg-purple-500',
+                                'bg-pink-500',
+                                'bg-indigo-500',
+                                'bg-teal-500',
+                            ];
+                        @endphp
+                        @foreach ($film->genres as $index => $genre)
+                            <span
+                                class="{{ $colors[$index % count($colors)] }} text-white text-sm px-4 py-1 rounded-full mr-2">
+                                {{ $genre->title }}
+                            </span>
                         @endforeach
                     </div>
-                    <p class="font-light text-white text-md leading-relaxed my-4">
+
+                    {{-- Tambahkan Age Restriction --}}
+                    <div class="my-4">
+                        <span class="bg-gray-200 text-gray-600 text-sm px-4 py-1 rounded-full">
+                            {{ $film->age }}+
+                        </span>
+                    </div>
+
+                    <p class="font-light text-white text-md leading-relaxed my-3">
                         {{ $film->description }}
                     </p>
                     <div class="flex items-center gap-3 my-3">
@@ -42,10 +65,21 @@
 
                     <!-- Trailer button with x-data directive -->
                     <div x-data="trailer()">
-                        <button @click="playTrailer('{{ Illuminate\Support\Str::afterLast($film->trailer, '/') }}')"
-                            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5">
-                            Watch Trailer <i class="fa-solid fa-circle-play"></i>
-                        </button>
+                        <div class="flex justify-left gap-5 items-center">
+                            <button @click="playTrailer('{{ Illuminate\Support\Str::afterLast($film->trailer, '/') }}')"
+                                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5">
+                                Watch Trailer <i class="fa-solid fa-circle-play"></i>
+                            </button>
+
+                            {{-- Border di tengah --}}
+                            <div class="h-5 w-px bg-gray-400"></div>
+
+                            {{-- Tambahan durasi --}}
+                            <div class="text-gray-300">
+                                <h2><span class="text-sm">{{ $film->duration }} minutes</span></h2>
+                            </div>
+                        </div>
+
                         <!-- Trailer Popup -->
                         <div x-show="showTrailer" x-cloak x-transition.opacity.duration.300ms @click.self="closeTrailer()"
                             @keydown.window.escape="closeTrailer()"
@@ -71,6 +105,7 @@
         </div>
         {{-- Card End --}}
 
+
         {{-- Castings Start --}}
         @if ($film->castings->isNotEmpty())
             <div class="container m-auto mt-16 px-3 md:px-0">
@@ -78,7 +113,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5 sm:px-1">
                     @foreach ($film->castings as $actor)
                         <div class="flex items-center space-x-4">
-                            <img src="{{ asset('storage/' . $actor->photo) }}" class="w-16 h-16 rounded-full object-cover"
+                            <img src="{{ asset('storage/assets/' . $actor->photo) }}" class="w-16 h-16 rounded-full object-cover"
                                 alt="{{ $actor->real_name }}">
                             <div>
                                 <p class="text-gray-400 text-sm">Cast</p>

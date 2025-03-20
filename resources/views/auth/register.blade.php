@@ -44,6 +44,13 @@
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Create an account
                     </h1>
+                    @if (session('success'))
+                        <div
+                            class="w-full max-w-md p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <form class="space-y-4 md:space-y-6" action="{{ route('register') }}" method="POST">
                         @csrf
                         <!-- Username -->

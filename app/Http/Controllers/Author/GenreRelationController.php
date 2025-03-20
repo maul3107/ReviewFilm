@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\GenreRelation;
 use App\Models\Genre;
@@ -13,7 +14,7 @@ class GenreRelationController extends Controller
 {
     public function index(Request $request)
     {
-        $userId = auth()->id(); // Mendapatkan ID user yang sedang login
+        $userId = Auth::id();// Mendapatkan ID user yang sedang login
 
         $genreRelations = DB::table('genres_relations')
             ->join('films', 'genres_relations.film_id', '=', 'films.id')
@@ -37,7 +38,7 @@ class GenreRelationController extends Controller
 
     public function create()
     {
-        $userId = auth()->id();
+        $userId =  Auth::id();
 
         // Menampilkan hanya film yang dibuat oleh user
         $films = Film::where('user_id', $userId)->get();
@@ -48,7 +49,7 @@ class GenreRelationController extends Controller
 
     public function store(Request $request)
     {
-        $userId = auth()->id();
+        $userId =  Auth::id();
 
         $request->validate([
             'film_id' => 'required|string|exists:films,id',
@@ -74,7 +75,7 @@ class GenreRelationController extends Controller
 
     public function edit($id)
     {
-        $userId = auth()->id();
+        $userId =  Auth::id();
 
         $film = Film::where('id', $id)->where('user_id', $userId)->first();
         if (!$film) {
@@ -89,7 +90,7 @@ class GenreRelationController extends Controller
 
     public function update(Request $request, $id)
     {
-        $userId = auth()->id();
+        $userId =  Auth::id();
 
         $request->validate([
             'film_id' => 'required|exists:films,id',
@@ -117,7 +118,7 @@ class GenreRelationController extends Controller
 
     public function destroy($id)
     {
-        $userId = auth()->id();
+        $userId =  Auth::id();
 
         $film = Film::where('id', $id)->where('user_id', $userId)->first();
         if (!$film) {

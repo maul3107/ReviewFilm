@@ -8,15 +8,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('films', function (Blueprint $table) {
-            $table->string('slug')->nullable()->unique()->after('title');
+            $table->integer('age')->nullable()->after('duration');
         });
     }
 
     public function down(): void
     {
         Schema::table('films', function (Blueprint $table) {
-            $table->dropColumn('slug');
+            $table->dropColumn('age');
         });
     }
 };
-

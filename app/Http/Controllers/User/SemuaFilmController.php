@@ -18,17 +18,36 @@ class SemuaFilmController extends Controller
 
     public function apiSearch(Request $request)
     {
-        $query = $request->input('q');
+        $query = trim($request->input('q', ''));
+        $age = $request->input('age');
+        $year = $request->input('year');
 
-        if (!$query || strlen($query) < 1) {
+        // Buat query builder
+        $filmsQuery = Film::query();
+
+        // Terapkan filter judul hanya jika query tidak kosong
+        if (!empty($query)) {
+            $filmsQuery->where('title', 'like', '%' . $query . '%');
+        }
+
+        // Terapkan filter umur jika ada
+        if (!empty($age)) {
+            $filmsQuery->where('age', $age);
+        }
+
+        // Terapkan filter tahun jika ada   
+        if (!empty($year)) {
+            $filmsQuery->where('release_year', $year);
+        }
+
+        // Jika tidak ada filter yang aktif, kembalikan array kosong
+        if (empty($query) && empty($age) && empty($year)) {
             return response()->json([]);
         }
 
-        $films = Film::where('title', 'like', '%' . $query . '%')
-            ->get(['id', 'title', 'slug', 'poster']);
-
+        // Ambil hasil dan kembalikan sebagai JSON
+        $films = $filmsQuery->get(['id', 'title', 'slug', 'poster']);
 
         return response()->json($films);
     }
-
 }

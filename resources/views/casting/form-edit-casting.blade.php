@@ -6,7 +6,7 @@
             class="rollback text-white py-2 px-4 rounded-full w-10 h-10 z-10 text-lg">&#10094;</a>
     </div>
     <form
-        action="{{ route(auth()->user()->role == 'author' ? 'author.update-casting' : 'admin.update-casting', $film->id) }}"
+        action="{{ route(auth()->user()->role == 'author' ? 'author.update-casting' : 'admin.update-casting', $films->id) }}"
         method="POST" class="form-input-data w-full container m-auto mt-5 p-10 rounded-lg" enctype="multipart/form-data">
         @csrf
         @method('PUT')

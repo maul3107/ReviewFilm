@@ -33,6 +33,7 @@
                     <th class="border border-gray-300 px-6 py-3">Avatar</th>
                     <th class="border border-gray-300 px-6 py-3">Nama</th>
                     <th class="border border-gray-300 px-6 py-3">Email</th>
+                    <th class="border border-gray-300 px-6 py-3">No Telp</th>
                     <th class="border border-gray-300 px-6 py-3">Role</th>
                     <th class="border border-gray-300 px-6 py-3">Action</th>
                 </tr>
@@ -47,6 +48,7 @@
                         </td>
                         <td class="border border-gray-300 px-6 py-4">{{ $user->name }}</td>
                         <td class="border border-gray-300 px-6 py-4">{{ $user->email }}</td>
+                        <td class="border border-gray-300 px-6 py-4">{{ $user->nomor_telepon }}</td>
                         <td class="border border-gray-300 px-6 py-4">{{ $user->role }}</td>
                         <td class="px-6 py-4 flex space-x-3">
                             <a href="{{ route('admin.edit-user', $user->id) }}" class="text-yellow-500 hover:underline">

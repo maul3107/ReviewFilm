@@ -35,6 +35,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'role' => 'required|string',
             'password' => 'required|string|min:8',
+            'nomor_telepon' => 'required|string',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -48,10 +49,11 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'role' => $request->input('role'),
             'password' => Hash::make($request->input('password')),
+            'nomor_telepon' => $request->input('nomor_telepon'),
             'avatar' => $avatarPath,
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan!');
+        return redirect()->route('admin.user.index')->with('success', 'User berhasil ditambahkan!');
     }
 
     public function edit($id)

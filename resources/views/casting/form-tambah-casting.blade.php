@@ -16,7 +16,7 @@
                     Foto
                 </label>
                 <input type="file" name="photo" id="photo"
-                    class="appearance-none block w-full bg-gray-100 text-gray-700 border {{ $errors->has('photo') ? 'border-red-500' : 'border-gray-400' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    class="appearance-none block w-full bg-white text-gray-700 border {{ $errors->has('photo') ? 'border-red-500' : 'border-gray-300' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
                 @error('photo')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -29,7 +29,8 @@
                     Nama Panggung
                 </label>
                 <input type="text" name="stage_name" id="stage_name" value="{{ old('stage_name') }}"
-                    class="appearance-none block w-full bg-gray-100 text-gray-700 border {{ $errors->has('stage_name') ? 'border-red-500' : 'border-gray-400' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    class="appearance-none block w-full bg-white text-gray-700 border {{ $errors->has('stage_name') ? 'border-red-500' : 'border-gray-300' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                    placeholder="Nama panggung">
                 @error('stage_name')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -42,7 +43,8 @@
                     Nama Asli
                 </label>
                 <input type="text" name="real_name" id="real_name" value="{{ old('real_name') }}"
-                    class="appearance-none block w-full bg-gray-100 text-gray-700 border {{ $errors->has('real_name') ? 'border-red-500' : 'border-gray-400' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    class="appearance-none block w-full bg-white text-gray-700 border {{ $errors->has('real_name') ? 'border-red-500' : 'border-gray-300' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                    placeholder="Nama asli">
                 @error('real_name')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -55,7 +57,7 @@
                     Nama Film
                 </label>
                 <select name="film_id" id="film_id"
-                    class="appearance-none block w-full bg-gray-100 text-gray-700 border {{ $errors->has('film_id') ? 'border-red-500' : 'border-gray-400' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    class="appearance-none block w-full bg-white text-gray-700 border {{ $errors->has('film_id') ? 'border-red-500' : 'border-gray-300' }} rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
                     <option value="">Pilih Film</option>
                     @foreach ($films as $film)
                         <option value="{{ $film->id }}" {{ old('film_id') == $film->id ? 'selected' : '' }}>

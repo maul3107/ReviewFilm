@@ -651,14 +651,22 @@
             }
         }
 
-        @media only screen and (min-width: 1024px) {
+        @media only screen and (min-width: 768px) {
+
             .swiper-pagination {
                 position: absolute !important;
-                bottom: 15% !important;
-                left: 7% !important;
+                bottom: 20% !important;
+                left: 10% !important;
+                transform: translateY(-50%);
                 display: flex;
                 justify-content: flex-start;
                 z-index: 10;
+            }
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .swiper-pagination {
+                left: 7% !important;
             }
         }
 
